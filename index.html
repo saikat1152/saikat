@@ -1,113 +1,681 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saikat - Research Portfolio</title>
-    <link rel="stylesheet" href="saikat.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Md. Safiqul Islam Saikat — Academic Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & tokens ───────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #ffffff;
+      --bg:      #f7f6f3;
+      --surface: #ffffff;
+      --border:  #d8d5ce;
+      --muted:   #6b6760;
+      --text:    #1a1917;
+      --accent:  #2a5f9e;          /* academic blue — links, hover states */
+      --accent-light: #e8f0fa;
+
+      --font-serif: 'Source Serif 4', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --nav-h: 48px;
+      --gutter: clamp(1rem, 5vw, 2.5rem);
+      --max-w: 820px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* ── Skip link ───────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -99px; left: 1rem;
+      background: var(--accent); color: #fff;
+      padding: .4rem .9rem; border-radius: 4px; font-size: .85rem;
+      transition: top .1s;
+      z-index: 200;
+    }
+    .skip-link:focus { top: .75rem; }
+
+    /* ── Sticky nav ──────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--nav-h);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+    }
+    nav ul {
+      max-width: var(--max-w);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex; gap: 1.75rem;
+      list-style: none;
+    }
+    nav a {
+      font-family: var(--font-sans);
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .15rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Page wrapper ────────────────────────────── */
+    main {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2.5rem var(--gutter) 4rem;
+    }
+
+    /* ── Header / profile block ──────────────────── */
+    .profile {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem 1.75rem;
+      align-items: start;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.25rem;
+    }
+    .profile-photo {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid var(--border);
+      /* placeholder gradient when no real photo */
+      background: linear-gradient(135deg, #c7d9f0 0%, #8fb4de 100%);
+    }
+    /* placeholder initials circle */
+    .profile-photo-placeholder {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #c7d9f0 0%, #8fb4de 100%);
+      border: 3px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 2rem; font-weight: 600;
+      color: #2a5f9e;
+      flex-shrink: 0;
+    }
+    .profile-info h1 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: .35rem;
+    }
+    .profile-info .title {
+      font-weight: 600;
+      font-size: .9rem;
+      margin-bottom: .1rem;
+    }
+    .profile-info .institution,
+    .profile-info .contact-line {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: .1rem;
+    }
+    .profile-info .contact-line a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .profile-info .contact-line a:hover { text-decoration: underline; }
+    .profile-links {
+      margin-top: .55rem;
+      font-size: .85rem;
+      display: flex; flex-wrap: wrap; gap: .25rem .15rem;
+    }
+    .profile-links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .profile-links a:hover { text-decoration: underline; }
+    .profile-links .sep { color: var(--border); user-select: none; }
+
+    /* ── Sections ────────────────────────────────── */
+    section { margin-bottom: 2.75rem; }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      color: var(--text);
+      margin-bottom: .85rem;
+      padding-bottom: .35rem;
+      border-bottom: 2px solid var(--accent-light);
+      display: flex; align-items: baseline; gap: .6rem;
+    }
+    .section-heading .back-top {
+      font-family: var(--font-sans);
+      font-size: .73rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: auto;
+    }
+    .section-heading .back-top:hover { color: var(--accent); }
+
+    h3 {
+      font-family: var(--font-sans);
+      font-size: .83rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin: 1.4rem 0 .55rem;
+    }
+    h3:first-child { margin-top: 0; }
+
+    p { margin-bottom: .75rem; max-width: 68ch; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── Research interests ──────────────────────── */
+    .interests {
+      margin-bottom: .9rem;
+      font-size: .9rem;
+    }
+    .interests strong { font-weight: 600; }
+
+    /* ── Project cards ───────────────────────────── */
+    .projects { display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0 1.1rem;
+      align-items: start;
+    }
+    .project-card img {
+      width: 140px; height: 90px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .project-img-placeholder {
+      width: 140px; height: 90px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #e4ecf7 0%, #c7d9f0 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .project-img-placeholder svg { opacity: .35; }
+    .project-title {
+      font-weight: 600;
+      font-size: .93rem;
+      margin-bottom: .3rem;
+      color: var(--text);
+    }
+    .project-desc {
+      font-size: .87rem;
+      color: #3d3b38;
+      line-height: 1.55;
+      max-width: none;
+      margin: 0;
+    }
+
+    /* ── Resources list ──────────────────────────── */
+    .resources-list {
+      list-style: disc;
+      padding-left: 1.3rem;
+      font-size: .87rem;
+      line-height: 1.6;
+      display: flex; flex-direction: column; gap: .3rem;
+    }
+    .resources-list a { color: var(--accent); text-decoration: none; }
+    .resources-list a:hover { text-decoration: underline; }
+
+    /* ── Student lists ───────────────────────────── */
+    .student-group { margin-bottom: 1rem; }
+    .student-group h4 {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+    .student-list {
+      list-style: disc;
+      padding-left: 1.3rem;
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    /* ── Publications ────────────────────────────── */
+    .book-card {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0 1.25rem;
+      align-items: start;
+      margin-bottom: 1.4rem;
+    }
+    .book-card img {
+      width: 100px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: block;
+    }
+    .book-cover-placeholder {
+      width: 100px; height: 130px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      background: linear-gradient(160deg, #2a5f9e 0%, #1a3a66 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .book-cover-placeholder span {
+      font-family: var(--font-serif);
+      font-size: .65rem;
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: .5rem;
+      line-height: 1.4;
+    }
+    .book-title { font-weight: 600; margin-bottom: .2rem; font-size: .93rem; }
+    .book-meta { font-size: .85rem; color: var(--muted); margin-bottom: .5rem; }
+    .book-desc { font-size: .87rem; line-height: 1.55; margin-bottom: .5rem; max-width: none; }
+    .book-links { font-size: .83rem; }
+    .book-links a { color: var(--accent); text-decoration: none; }
+    .book-links a:hover { text-decoration: underline; }
+    .book-links .sep { color: var(--border); }
+
+    .papers { display: flex; flex-direction: column; gap: .85rem; }
+    .paper { font-size: .88rem; line-height: 1.6; }
+    .paper-title { font-weight: 600; margin-bottom: .15rem; }
+    .paper-meta { color: var(--muted); }
+    .paper-meta em { font-style: italic; }
+    .paper-meta .award {
+      font-style: italic;
+      color: #8a6e00;
+    }
+    .paper-links a { color: var(--accent); text-decoration: none; font-size: .83rem; }
+    .paper-links a:hover { text-decoration: underline; }
+    .paper-links .sep { color: var(--border); }
+
+    /* ── Teaching ────────────────────────────────── */
+    .course-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .35rem;
+      font-size: .89rem;
+    }
+    .course-list li { display: flex; gap: .65rem; }
+    .course-term {
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      color: var(--muted);
+      min-width: 3.5rem;
+    }
+
+    /* ── Funding ─────────────────────────────────── */
+    .funding-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .7rem;
+      font-size: .88rem;
+    }
+    .funding-list li { padding-left: 1.1rem; position: relative; }
+    .funding-list li::before {
+      content: '';
+      position: absolute; left: 0; top: .55em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .7;
+    }
+
+    /* ── Join my lab ─────────────────────────────── */
+    .pathway { margin-bottom: 1.75rem; }
+    .pathway h4 {
+      font-size: .9rem;
+      font-weight: 600;
+      margin-bottom: .55rem;
+      color: var(--text);
+    }
+    .pathway ul {
+      list-style: disc;
+      padding-left: 1.3rem;
+      font-size: .88rem;
+      line-height: 1.65;
+      display: flex; flex-direction: column; gap: .3rem;
+    }
+    .pathway ul a { color: var(--accent); text-decoration: none; }
+    .pathway ul a:hover { text-decoration: underline; }
+
+    .subheading {
+      font-family: var(--font-sans);
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1rem 0 .4rem;
+    }
+
+    /* ── Footer ──────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+      padding-top: 1.1rem;
+      font-size: .78rem;
+      color: var(--muted);
+      max-width: var(--max-w);
+      margin-left: auto; margin-right: auto;
+      padding-left: var(--gutter); padding-right: var(--gutter);
+    }
+
+    /* ── Utility ─────────────────────────────────── */
+    a { color: var(--accent); }
+    strong { font-weight: 600; }
+
+    /* ── Responsive ──────────────────────────────── */
+    @media (max-width: 560px) {
+      .profile {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+      .project-card img,
+      .project-img-placeholder {
+        width: 100%; height: 160px;
+      }
+      .book-card {
+        grid-template-columns: 1fr;
+      }
+      nav ul { gap: 1rem; overflow-x: auto; padding-bottom: 2px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
 </head>
 
-<body>
-    <div class="container">
-        <header class="header">
-            <img src="images/saikat.png" alt="Profile Picture" class="profile-img">
-            <div class="header-content">
-                <h1>Md. Safiqul Islam Saikat</h1>
-                <div class="current-position">
-                    Senior Officer-IT (Assistant Prorammer)
-                    <br>
-                    💼 Janata Bank PLC.
-                    <br>
-                    🎓 Graduated from Khulna University of Engineering & Technology
-                    <br>
-                    Phd Applicants
-                </div>
-                <div class="contact-info">
-                    <a href="mailto:saikat25.g@gmail.com">📧 saikat25.g@gmail.com</a>
-                    <a href="https://gitlab.com/users/saikat25/projects">🔗 GitLab</a>
-                    <a href="https://github.com/saikat1152">🔗 GitHub</a>
-                    <a href="cv/MD_SAFIQUL_ISLAM_CV.pdf">📄CV</a>
-                    <!--   <a href="https://scholar.google.com/citations">📚 Google Scholar</a> -->
-                    <a href="https://orcid.org/0009-0005-9935-8479">🆔 ORCID</a>
-                </div>
-            </div>
-        </header>
+<body id="home">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        <section class="section">
-            <h2>Interested Research Fields</h2>
-            <p>Development of advanced software has fostered my interest in the Artificial Intelligence, Machine
-                Learning, Security related fields. Security aspects remain a censorious and complicated challenge for
-                development and maintenance teams. My objective is to research the existing gaps in those areas such as
-                forensic analysis, reverse engineering, and vulnerability assessment, exploring ingenious methodologies
-                to heighten system pliancy and security from multiple viewpoints. </p> <br />
-            <div class="research-interests">
-                <span class="interest-tag">Machine Learning</span>
-                <span class="interest-tag">Artificial Intelligence</span>
-                <span class="interest-tag">Cyber Security</span>
-                <span class="interest-tag">Cyber Physical system</span>
-                <span class="interest-tag">Digital forensics</span>
-                <span class="interest-tag">Computer Networks & Security</span>
+  <!-- ── Navigation ── -->
+  <nav aria-label="Page sections">
+    <ul>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+    </ul>
+  </nav>
 
+  <main id="main">
 
-            </div>
-        </section>
+    <!-- ── Profile header ── -->
+    <header class="profile">
+      <img class="profile-photo" src="images/saikat.png" alt="Md. Safiqul Islam Saikat">
 
-        <section class="section">
-            <h2>Selected Publications</h2>
-            <div class="publication">
-                <div class="publication-title">
-                    <a href="https://drive.google.com/drive/folders/1ENhF2n-0vM0JBxhvsHEcEGX9ao6aj8y9?usp=sharing">"Reinforcement
-                        Learning for Optimizing Bowling Strategies in One Day Internationals"</a>
-                </div>
-                <div class="publication-authors">
-                    Hasibul Hasan Rupok , Md. Safiqul Islam Saikat , Md Shafikul Islam
-                </div>
-                <div class="publication-venue">
-                    International Conference on Computer and Information Technology, 2025 | DOI: <a
-                        href="https://doi.org/10.5281/zenodo.16911694">10.5281/zenodo.16911694</a>
-                </div>
-            </div>
-        </section>
+      <div class="profile-info">
+        <h1>Md. Safiqul Islam Saikat</h1>
+        <p class="title">MSc Student in Computer Science &amp; Engineering</p>
+        <p class="institution">Dhaka International University, Dhaka, Bangladesh</p>
+        <p class="institution">Senior Officer (IT), Janata Bank PLC</p>
+        <p class="contact-line">
+          <a href="mailto:saikat25.g@gmail.com">saikat25.g@gmail.com</a>
+        </p>
+        <p class="contact-line">Rampura, Dhaka, Bangladesh</p>
+        <div class="profile-links">
+          <a href="https://scholar.google.com/citations?hl=en&user=-AxQRhQAAAAJ&view_op=list_works">Google Scholar</a>
+          <span class="sep"> | </span>
+          <a href="https://www.researchgate.net/profile/Safiqul-Islam-Saikat">ResearchGate</a>
+          <span class="sep"> | </span>
+          <a href="https://github.com/saikat1152">GitHub</a>
+          <span class="sep"> | </span>
+          <a href="https://gitlab.com/users/saikat25/projects">GitLab</a>
+          <span class="sep"> | </span>
+          <a href="Safiqul_Islam_CV.pdf">CV</a>
+        </div>
+      </div>
+    </header>
 
-        <section class="section">
-            <h2>Education</h2>
-            <div class="education-item">
-                <div class="degree">Bachelor of Science (B. Sc.) in Computer Science and Engineering</div>
-                <div class="university">Khulna University of Engineering & Technology, Khulna, Bangladesh</div>
-                <div class="duration">February 2012 to April 2016</div>
-            </div>
-            <div class="education-item">
-                <div class="degree">Higher Secondary Certificate</div>
-                <div class="university">Notre Dame College</div>
-                <div class="board">Dhaka Board</div>
-                <div class="duration">2009-10</div>
-            </div>
-            <div class="education-item">
-                <div class="degree">School Secondary Certificate</div>
-                <div class="university">Ideal School & college</div>
-                <div class="board">Dhaka Board</div>
-                <div class="duration">1999-2008</div>
-            </div>
-        </section>
+    <!-- ── Short bio ── -->
+    <section id="bio">
+      <h2 class="section-heading">Short bio</h2>
+      <p>
+        I am an MSc student in Computer Science and Engineering at Dhaka International University
+        and a Senior Officer (IT) at Janata Bank PLC, with seven years of professional software
+        engineering experience. I completed my BSc in Computer Science and Engineering at Khulna
+        University of Engineering &amp; Technology (KUET) in 2016.
+      </p>
+      <p>
+        Building large-scale software sparked my interest in intelligent systems with smart,
+        threat-preventive features. I am interested in building secured autonomous systems with
+        artificial intelligence, machine learning and computer vision, along with their applications
+        and explainability. Recent work and projects moved my career from industry applications
+        toward research applications.
+      </p>
+    </section>
 
-        <section class="section">
-            <h2>Professional Training</h2>
-            <ul class="awards-list">
-                <li> Advance Training on Oracle Database Management – IBCS-PRIMAX SOTWARE(BD) Ltd</li>
-                <li> Cisco Certified Network Associate Routing and Switching (Cisco ID- CSCO12932705)</li>
-            </ul>
-        </section>
+    <!-- ── Research ── -->
+    <section id="research">
+      <h2 class="section-heading">Research</h2>
 
-        <section class="section">
-            <h2> Online Course</h2>
-            <ul class="course-list">
-                <li> Certification of Programming for Everybody - University of Michigan</li>
-                <li> Certification of Python Data Structures - University of Michigan </li>
-                <li> Certification of Using Python to Access Web Data - University of Michigan</li>
-            </ul>
-        </section>
-    </div>
-</body>
+      <p class="interests">
+        <strong>Research interests:</strong>
+        Artificial Intelligence; Machine Learning; Computer Vision; Autonomous Systems;
+        forensics and security; road safety.
+      </p>
 
-</html>
+      <h3>Projects</h3>
+      <div class="projects">
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a5f9e" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <div>
+            <p class="project-title">An iRAP-Inspired Relative Road-Condition Index from Street-Level Imagery and Visual Question Answering (MSc thesis)</p>
+            <p class="project-desc">
+              A road-safety study that builds an iRAP-inspired relative road-condition index from
+              Mapillary street-level imagery, OpenStreetMap road networks and an iRAP-style visual
+              question answering protocol. Keywords: map matching, composite indicator, AI models,
+              structured questionnaires.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a5f9e" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <p class="project-title">Reinforcement Learning for Bowling Strategies in One Day Internationals</p>
+            <p class="project-desc">
+              A Deep Q-Network approach to optimizing bowling strategies in One Day International
+              cricket, published at ICCIT 2025.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a5f9e" stroke-width="1.5">
+              <path d="M3 6h18M3 12h18M3 18h12"/>
+            </svg>
+          </div>
+          <div>
+            <p class="project-title">BEFTN and RTGS at Janata Bank PLC</p>
+            <p class="project-desc">
+              Bangladesh Electronic Funds Transfer Network and Real-Time Gross Settlement software
+              built with Spring Boot and Oracle 19c. Its API communicates with the core banking
+              software and Bangladesh Bank, and all Janata Bank branches use it.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2a5f9e" stroke-width="1.5">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div>
+            <p class="project-title">Online Purchase and Sales Management System (BSc thesis)</p>
+            <p class="project-desc">
+              An e-commerce site with an admin panel, central inventory management, payment gateway
+              and cash-on-delivery ordering, SMS integration and CanvasJS ratings. Built with Python,
+              Django and MySQL, and deployed on a VPS with Nginx, WSGI and Let's Encrypt.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /projects -->
+
+      <h3>Earlier academic projects</h3>
+      <ul class="resources-list">
+        <li><strong>Event Management System</strong>: Java and MySQL desktop application to create, customize, edit and delete event information.</li>
+        <li><strong>File Downloader</strong>: PHP and MySQL site where users create an account and download free software.</li>
+        <li><strong>Term Result Calculator</strong>: Java desktop software that generates term results and printable PDF result sheets.</li>
+        <li><strong>Hospital Management</strong>: Oracle 10g database tracking doctor and patient appointment schedules.</li>
+      </ul>
+
+      <h3>Code repositories</h3>
+      <ul class="resources-list">
+        <li><a href="https://github.com/saikat1152">GitHub</a>: personal projects and research code.</li>
+        <li><a href="https://gitlab.com/users/saikat25/projects">GitLab</a>: additional projects.</li>
+      </ul>
+    </section>
+
+    <!-- ── Publications ── -->
+    <section id="publications">
+      <h2 class="section-heading">
+        Publications
+        <a class="back-top" href="#home">↑</a>
+      </h2>
+
+      <p style="font-size:.87rem; margin-bottom:1.1rem;">
+        See <a href="https://scholar.google.com/citations?hl=en&user=-AxQRhQAAAAJ&view_op=list_works">Google Scholar</a>
+        and <a href="https://www.researchgate.net/profile/Safiqul-Islam-Saikat">ResearchGate</a> for the full publication list.
+      </p>
+
+      <h3>Selected recent papers</h3>
+      <div class="papers">
+        <div class="paper">
+          <p class="paper-title">Reinforcement Learning for Optimizing Bowling Strategies in One Day Internationals.</p>
+          <p class="paper-meta">
+            Hasibul Hasan Rupok, <strong>Md. Safiqul Islam Saikat</strong>, and Md Shafikul Islam.
+            <em>International Conference on Computer and Information Technology (ICCIT), Cox's Bazar, Bangladesh, 2025.</em>
+          </p>
+          <p class="paper-links">
+            <a href="https://doi.org/10.1109/ICCIT68739.2025.11490554">DOI: 10.1109/ICCIT68739.2025.11490554</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education ── -->
+    <section id="education">
+      <h2 class="section-heading">
+        Education
+        <a class="back-top" href="#home">↑</a>
+      </h2>
+      <ul class="course-list">
+        <li>
+          <span class="course-term">2025–2026</span>
+          <span><strong>MSc in Computer Science and Engineering</strong>, Dhaka International University, Bangladesh</span>
+        </li>
+        <li>
+          <span class="course-term">2012–2016</span>
+          <span><strong>BSc in Computer Science and Engineering</strong>, Khulna University of Engineering &amp; Technology, Bangladesh</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── Experience ── -->
+    <section id="experience">
+      <h2 class="section-heading">
+        Professional experience
+        <a class="back-top" href="#home">↑</a>
+      </h2>
+      <ul class="course-list">
+        <li>
+          <span class="course-term">2021–now</span>
+          <span><strong>Senior Officer (IT)</strong>, Janata Bank PLC. BEFTN and RTGS with Spring Boot and Oracle 19c, secured with Spring Security.</span>
+        </li>
+        <li>
+          <span class="course-term">2019–2020</span>
+          <span><strong>Software Engineer</strong>, AtomAP Limited. Secure payment APIs and banking wallets in Java Spring, plus IoT projects (car automation, gas alarm, weight alarm).</span>
+        </li>
+        <li>
+          <span class="course-term">2019</span>
+          <span><strong>Software Engineer</strong>, Pine Solutions Limited. WeeReach, a Python and Laravel API for bulk text and voice SMS notifications to bank customers.</span>
+        </li>
+        <li>
+          <span class="course-term">2016–2019</span>
+          <span><strong>Software Engineer</strong>, BJIT Limited. Rakuten event management platform (Java, JBPM, AngularJS, MySQL, Redis) and Groovy REST APIs; also an ANC noise-cancellation project in Python and the Reata Android assistant.</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── Skills ── -->
+    <section id="skills">
+      <h2 class="section-heading">
+        Technical skills
+        <a class="back-top" href="#home">↑</a>
+      </h2>
+      <ul class="resources-list">
+        <li><strong>Languages:</strong> Java, Python, C++</li>
+        <li><strong>Frameworks:</strong> Spring Boot, Spring Data JPA, Spring Security, Hibernate</li>
+        <li><strong>ML and PyTools:</strong> NumPy, Scikit-learn, Keras, Matplotlib, TensorFlow, PyTorch, OSMnx, NetworkX, pandas, pyproj, leuvenmapmatching, Rtree, Folium, requests (Mapillary API), Pillow</li>
+        <li><strong>Testing:</strong> Spock, JUnit</li>
+        <li><strong>Databases:</strong> Oracle 19c, MySQL</li>
+        <li><strong>Platforms:</strong> Linux (Ubuntu), Windows</li>
+        <li><strong>IDEs and Others:</strong> Eclipse, IntelliJ IDEA, PyCharm, Code::Blocks, Apache Tomcat, Postman, Android</li>
+        <li><strong>Collaboration:</strong> Git, JIRA, Confluence, Trello</li>
+        <li><strong>Networking:</strong> CCNA training (KUET), CCNA (R&amp;S)</li>
+      </ul>
+    </section>
+
+    <!-- ── Certifications ── -->
+    <section id="certifications">
+      <h2 class="section-heading">
+        Certifications
+        <a class="back-top" href="#home">↑</a>
+      </h2>
+      <ul class="resources-list">
+        <li>Advance Training on Oracle Database Management, IBCS-PRIMAX Software (BD) Ltd.</li>
+        <li>Cisco Certified Network Associate, Routing and Switching (Cisco ID CSCO12932705)</li>
+        <li>Programming for Everybody, University of Michigan (Coursera)</li>
+        <li>Python Data Structures, University of Michigan (Coursera)</li>
+        <li>Using Python to Access Web Data, University of Michigan (Coursera)</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    Last update: October 2026
